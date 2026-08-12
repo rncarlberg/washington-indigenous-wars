@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Washington Indigenous Wars — shared stylesheet
+   Design concept: a territorial ledger / survey-map archive.
+   Dark, warm ground (like aged walnut-ink) with parchment document
+   panels, a rust wax-seal accent for emphasis, and a river-blue accent
+   for wayfinding — a nod to the Columbia/Yakima river systems that
+   shape this history.
+   ========================================================================== */
+
+:root {
+  --ink: #1c1712;
+  --ground: #26201a;         /* page background: warm dark walnut */
+  --ground-alt: #2f2820;
+  --parchment: #ece1c6;      /* document panels */
+  --parchment-dim: #ddceaa;
+  --parchment-line: #cdbb8f;
+  --rust: #a4462c;           /* wax-seal accent */
+  --rust-dim: #7c3521;
+  --river: #3b5b68;          /* river-blue accent */
+  --river-dim: #294450;
+  --ink-soft: #4a4136;
+
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-meta: "Special Elite", "Courier New", monospace;
+
+  --max-width: 880px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(255,255,255,0.03), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(0,0,0,0.25), transparent 60%);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+a { color: var(--rust); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: #c85a3b; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--river); outline-offset: 3px; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--parchment);
+  line-height: 1.2;
+  margin: 0 0 0.6em;
+}
+
+h1 { font-size: clamp(2.1rem, 4vw, 3.1rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.25rem; }
+
+.meta, .eyebrow, figcaption, .site-header .tagline {
+  font-family: var(--font-meta);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--rust); color: #fff; padding: 0.6em 1em; z-index: 100;
+}
+.skip-link:focus { left: 1em; top: 1em; }
+
+/* ---------- header / masthead ---------- */
+.site-header {
+  border-bottom: 3px double var(--parchment-line);
+  background: linear-gradient(180deg, var(--ground-alt), var(--ground));
+  padding: 1.6rem 1.2rem 0;
+}
+.masthead {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+.masthead .eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.masthead h1 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  margin-bottom: 0.15em;
+}
+.masthead .tagline {
+  font-size: 0.85rem;
+  color: var(--parchment-dim);
+  margin-bottom: 1.2rem;
+}
+
+/* ---------- nav ---------- */
+nav.primary {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-top: 1px solid var(--parchment-line);
+}
+nav.primary ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2rem 1.6rem;
+  margin: 0;
+  padding: 0.9rem 0;
+}
+nav.primary li { position: relative; }
+nav.primary a {
+  color: var(--parchment);
+  font-family: var(--font-meta);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+nav.primary a:hover,
+nav.primary a[aria-current="page"] {
+  border-bottom-color: var(--rust);
+  color: #fff;
+}
+nav.primary .submenu {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+nav.primary .submenu a { font-size: 0.72rem; opacity: 0.85; }
+
+/* ---------- layout shell ---------- */
+main { display: block; }
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.6rem 1.2rem 3rem;
+}
+
+/* ---------- hero / intro ---------- */
+.hero-intro {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.6rem 1.2rem 0;
+  text-align: center;
+  color: var(--parchment-dim);
+  font-style: italic;
+}
+
+/* ---------- parchment panel (document card) ---------- */
+.panel {
+  background: var(--parchment);
+  color: var(--ink);
+  border: 1px solid var(--parchment-line);
+  border-radius: 2px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  padding: 2rem clamp(1.2rem, 4vw, 2.6rem);
+  margin: 0 0 2.4rem;
+}
+.panel h2, .panel h3, .panel h4 { color: var(--ink); }
+.panel a { color: var(--rust-dim); }
+.panel::before {
+  content: "";
+  display: block;
+  height: 4px;
+  margin: -2rem clamp(-1.2rem, -4vw, -2.6rem) 1.6rem;
+  background: linear-gradient(90deg, var(--rust), var(--river));
+}
+
+/* ---------- the signature element: the trail line ---------- */
+/* A dotted wagon-trail / river route connecting chronological
+   entries — used on the Home and Time Line pages, echoing the
+   seasonal-round and treaty-trail routes described in the text. */
+.trail {
+  position: relative;
+  margin: 0 0 2.4rem;
+  padding-left: 2.2rem;
+  border-left: 3px dotted var(--rust-dim);
+}
+.trail-stop {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.trail-stop:last-child { margin-bottom: 0; }
+.trail-stop::before {
+  content: "";
+  position: absolute;
+  left: -2.55rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  background: var(--river);
+  border: 2px solid var(--parchment);
+  border-radius: 50%;
+}
+.trail-stop .date {
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+  color: var(--rust-dim);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.trail-stop h3 { margin-bottom: 0.3em; }
+.trail-era-label {
+  font-family: var(--font-meta);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--river-dim);
+  display: block;
+  margin: 2.2rem 0 0.6rem;
+}
+.trail-era-label:first-child { margin-top: 0; }
+
+/* ---------- pull quote / speech block ---------- */
+blockquote.speech {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink);
+  border-left: 4px solid var(--rust);
+  padding: 0.2rem 0 0.2rem 1.4rem;
+  margin: 1.6rem 0;
+}
+blockquote.speech cite {
+  display: block;
+  font-family: var(--font-meta);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+/* ---------- figure / captions ---------- */
+figure { margin: 0 0 1.8rem; }
+figure img {
+  border: 6px solid #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+figcaption {
+  font-size: 0.78rem;
+  color: var(--parchment-dim);
+  margin-top: 0.6rem;
+  text-align: center;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.6rem 1.2rem;
+  margin: 2rem 0;
+}
+
+/* ---------- two-column page: narrative + portrait rail ---------- */
+/* Signature layout for image-rich pages: the war-time photographs
+   travel down the right margin like a survey map's marginalia,
+   roughly level with the events they depict. */
+.with-rail {
+  --rail-width: 232px;
+  max-width: calc(var(--max-width) + var(--rail-width) + 2.4rem);
+  margin: 0 auto;
+  padding: 2.6rem 1.2rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr var(--rail-width);
+  gap: 0 2.4rem;
+  align-items: start;
+}
+.with-rail .narrative { min-width: 0; }
+.image-rail {
+  position: sticky;
+  top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.image-rail figure {
+  margin: 0;
+  background: var(--parchment);
+  padding: 0.5rem 0.5rem 0.9rem;
+  border: 1px solid var(--parchment-line);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+}
+.image-rail figure img {
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+.image-rail figcaption {
+  color: var(--ink-soft);
+  text-align: left;
+  padding: 0 0.2rem;
+}
+.image-rail figcaption .rail-label {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--rust-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 860px) {
+  .with-rail {
+    grid-template-columns: 1fr;
+  }
+  .image-rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .image-rail figure {
+    flex: 1 1 150px;
+    max-width: 220px;
+  }
+}
+
+/* ---------- chapter list ---------- */
+.chapters { list-style: none; margin: 0; padding: 0; counter-reset: chapter; }
+.chapters li {
+  counter-increment: chapter;
+  padding: 1rem 0 1rem 3rem;
+  position: relative;
+  border-bottom: 1px solid var(--parchment-line);
+}
+.chapters li:last-child { border-bottom: none; }
+.chapters li::before {
+  content: counter(chapter, upper-roman);
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  color: var(--rust-dim);
+  width: 2.4rem;
+}
+.chapters h4 { margin-bottom: 0.25em; font-size: 1.05rem; }
+.chapters p { margin: 0; font-size: 0.96rem; }
+
+/* ---------- data table ---------- */
+.data-table-wrap { overflow-x: auto; margin: 1.6rem 0; }
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  background: #fff;
+}
+table.data caption {
+  text-align: left;
+  font-family: var(--font-meta);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+table.data th, table.data td {
+  border: 1px solid var(--parchment-line);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+table.data thead th {
+  background: var(--parchment-dim);
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+table.data tfoot td { font-weight: 700; background: var(--parchment-dim); }
+
+/* ---------- bibliography ---------- */
+.biblio-entry { margin: 0 0 1.8rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--parchment-line); }
+.biblio-entry:last-child { border: none; margin: 0; padding: 0; }
+.biblio-entry .citation { font-family: var(--font-display); font-style: italic; margin-bottom: 0.4em; }
+
+/* ---------- callout ---------- */
+.callout {
+  background: var(--parchment-dim);
+  border-left: 4px solid var(--river);
+  padding: 1rem 1.4rem;
+  margin: 1.6rem 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  border-top: 3px double var(--parchment-line);
+  background: var(--ground-alt);
+  padding: 2.6rem 1.2rem 2rem;
+  text-align: center;
+}
+.site-footer .wrap { padding-top: 0; padding-bottom: 0; }
+.site-footer nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.4rem;
+  padding: 0;
+  margin: 0 0 1.6rem;
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+}
+.site-footer nav a { color: var(--parchment); text-decoration: none; }
+.site-footer nav a:hover { color: var(--rust); }
+.site-footer .about {
+  max-width: 640px;
+  margin: 0 auto 1.8rem;
+  color: var(--parchment-dim);
+  font-size: 0.92rem;
+}
+.site-footer .about strong { color: var(--parchment); }
+
+.contact-form {
+  max-width: 480px;
+  margin: 0 auto 1.8rem;
+  text-align: left;
+  display: grid;
+  gap: 0.8rem;
+}
+.contact-form label {
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--parchment-dim);
+}
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  background: var(--parchment);
+  border: 1px solid var(--parchment-line);
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+}
+.contact-form button {
+  justify-self: start;
+  background: var(--rust);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.6rem;
+  font-family: var(--font-meta);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.contact-form button:hover { background: var(--rust-dim); }
+
+.copyright {
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  color: var(--parchment-dim);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 620px) {
+  nav.primary ul { gap: 0.4rem 1rem; }
+  .panel { padding: 1.6rem 1.2rem; }
+  .trail { padding-left: 1.6rem; }
+  .trail-stop::before { left: -1.95rem; }
+}
