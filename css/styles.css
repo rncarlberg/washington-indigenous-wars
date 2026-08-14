@@ -123,6 +123,7 @@ nav.primary a {
   color: var(--parchment);
   font-family: var(--font-meta);
   font-size: 0.82rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -136,13 +137,27 @@ nav.primary a[aria-current="page"] {
 }
 nav.primary .submenu {
   list-style: none;
-  margin: 0.35rem 0 0;
-  padding: 0 0 0 1rem;
+  margin: 0.4rem 0 0;
+  padding: 0.4rem 0 0 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
+  border-left: 2px solid var(--rust-dim);
 }
-nav.primary .submenu a { font-size: 0.72rem; opacity: 0.85; }
+nav.primary .submenu a {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--parchment-dim);
+  opacity: 1;
+}
+nav.primary .submenu a:hover,
+nav.primary .submenu a[aria-current="page"] {
+  color: #fff;
+  border-bottom-color: var(--rust);
+}
 
 /* ---------- layout shell ---------- */
 main { display: block; }
