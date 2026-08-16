@@ -487,3 +487,80 @@ table.data tfoot td { font-weight: 700; background: var(--parchment-dim); }
   .trail { padding-left: 1.6rem; }
   .trail-stop::before { left: -1.95rem; }
 }
+
+/* ---------- Splawn chat widget ---------- */
+.splawn-chat { margin-top: 2rem; border-top: 3px double var(--parchment-line); padding-top: 2rem; }
+.chat-disclaimer {
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  background: var(--parchment-dim);
+  border-left: 3px solid var(--rust);
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.4rem;
+}
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--parchment-dim);
+  border: 1px solid var(--parchment-line);
+  border-radius: 4px;
+}
+.chat-bubble {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  max-width: 85%;
+  white-space: pre-wrap;
+}
+.chat-bubble-bot {
+  background: var(--parchment);
+  border: 1px solid var(--parchment-line);
+  align-self: flex-start;
+}
+.chat-bubble-user {
+  background: var(--rust);
+  color: #fff;
+  align-self: flex-end;
+}
+.chat-form { display: flex; gap: 0.6rem; align-items: flex-end; }
+.chat-form textarea {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--parchment-line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+}
+.chat-form button {
+  font-family: var(--font-meta);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--rust);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.chat-form button:hover { background: var(--rust-dim); }
+.chat-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.chat-status { font-family: var(--font-meta); font-size: 0.78rem; color: var(--ink-soft); min-height: 1.2em; margin-top: 0.4rem; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+@media (max-width: 620px) {
+  .chat-bubble { max-width: 100%; }
+}

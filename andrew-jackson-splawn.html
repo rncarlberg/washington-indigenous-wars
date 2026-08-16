@@ -141,6 +141,82 @@ He later served a year as police chief.</p>
 pet store. He is buried in Tahoma Cemetery.</p>
 </div>
 
+<div class="panel splawn-chat">
+<h2>Talk to Jack Splawn</h2>
+<p class="chat-disclaimer"><strong>This is an AI simulation, not the historical record.</strong> It's built
+to answer in Splawn&rsquo;s voice, grounded in his own memoir and the documented facts of his life above.
+It may speculate in character, but it isn&rsquo;t a transcript of anything he actually said, and it can get
+things wrong. Treat it as a conversation starter, not a source.</p>
+
+<div id="splawn-messages" class="chat-messages" aria-live="polite">
+  <div class="chat-bubble chat-bubble-bot">Well now, pull up a chair. Name&rsquo;s Jack Splawn &mdash;
+  ask me about the cattle drives, about Kamiakin, or about the old Yakima country, and I&rsquo;ll tell you
+  what I know.</div>
+</div>
+
+<form id="splawn-form" class="chat-form">
+  <label for="splawn-input" class="sr-only">Your message to Jack Splawn</label>
+  <textarea id="splawn-input" rows="2" maxlength="2000" placeholder="Ask him something&hellip;" required></textarea>
+  <button type="submit" id="splawn-send">Send</button>
+</form>
+<p id="splawn-status" class="chat-status" aria-live="polite"></p>
+</div>
+
+<script>
+(function() {
+  const WORKER_URL = "https://splawn-chat.YOUR-SUBDOMAIN.workers.dev";
+
+  const form = document.getElementById("splawn-form");
+  const input = document.getElementById("splawn-input");
+  const messagesEl = document.getElementById("splawn-messages");
+  const statusEl = document.getElementById("splawn-status");
+  const sendBtn = document.getElementById("splawn-send");
+  let history = [];
+
+  function addBubble(text, who) {
+    const div = document.createElement("div");
+    div.className = "chat-bubble " + (who === "user" ? "chat-bubble-user" : "chat-bubble-bot");
+    div.textContent = text;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+
+    addBubble(text, "user");
+    history.push({ role: "user", content: text });
+    input.value = "";
+    sendBtn.disabled = true;
+    statusEl.textContent = "Thinking\u2026";
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        statusEl.textContent = data.error || "Something went wrong. Please try again.";
+      } else {
+        addBubble(data.reply, "bot");
+        history.push({ role: "assistant", content: data.reply });
+        statusEl.textContent = "";
+      }
+    } catch (err) {
+      statusEl.textContent = "Couldn't reach the server. Please try again in a moment.";
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+})();
+</script>
+
 </div>
 </main>
 
