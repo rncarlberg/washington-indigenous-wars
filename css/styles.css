@@ -666,3 +666,6 @@ table.data tfoot td { font-weight: 700; background: var(--parchment-dim); }
 @media (max-width: 620px) {
   .chat-bubble { max-width: 100%; }
 }
+
+/* Missionary perspectives: readable excerpts and expandable source passages. */
+.faith-land{margin:2rem 0;padding:1.4rem;border:2px solid #7c3521;border-radius:4px;background:#f5ecd8;color:#1c1712}.faith-land h3,.faith-land h4{color:#1c1712}.faith-land h4{margin-top:1.6rem}.faith-land blockquote{margin:1rem 0;padding:.2rem 1rem;border-left:4px solid #7c3521;color:#1c1712}.faith-land summary{cursor:pointer;font-weight:bold;text-decoration:underline;padding:.5rem 0}.faith-land .source-note{font-size:.92rem}
