@@ -55,12 +55,12 @@
   <ol>
     <li><a href="#earlier-peopling"><strong>More than 20,000 years ago</strong><span>People are present in North America.</span></a></li>
     <li><a href="#coopers-ferry"><strong>About 16,000 years ago</strong><span>People live at Cooper&rsquo;s Ferry in the Columbia Basin.</span></a></li>
-    <li><a href="#era-contact"><strong>1600s&ndash;1700s</strong><span>Horses, trade goods and disease arrive through expanding networks.</span></a></li>
-    <li><a href="#era-contact"><strong>1774&ndash;1811</strong><span>Maritime contact and the fur trade connect the Northwest to world markets.</span></a></li>
-    <li><a href="#era-missions"><strong>1830s&ndash;1850s</strong><span>Missions, settlement and spiritual change reshape the region.</span></a></li>
-    <li><a href="#era-treaties-wars"><strong>1854&ndash;1855</strong><span>The Stevens Treaties seek to extinguish Indigenous title.</span></a></li>
-    <li><a href="#era-treaties-wars"><strong>1855&ndash;1858</strong><span>Territorial wars end in military conquest of the interior.</span></a></li>
-    <li><a href="#era-survival"><strong>1860s&ndash;1890s</strong><span>Indigenous peoples resist, adapt and defend land, religion and sovereignty.</span></a></li>
+    <li><a href="#horse-reaches-plateau"><strong>1600s&ndash;1700s</strong><span>Horses, trade goods and disease arrive through expanding networks.</span></a></li>
+    <li><a href="#first-documented-contact"><strong>1774&ndash;1811</strong><span>Maritime contact and the fur trade connect the Northwest to world markets.</span></a></li>
+    <li><a href="#missions-and-spiritual-change"><strong>1830s&ndash;1850s</strong><span>Missions, settlement and spiritual change reshape the region.</span></a></li>
+    <li><a href="#stevens-treaties"><strong>1854&ndash;1855</strong><span>The Stevens Treaties seek to extinguish Indigenous title.</span></a></li>
+    <li><a href="#spokane-war-turning-point"><strong>1855&ndash;1858</strong><span>Territorial wars end in military conquest of the interior.</span></a></li>
+    <li><a href="#smohalla-renewal"><strong>1860s&ndash;1890s</strong><span>Indigenous peoples resist, adapt and defend land, religion and sovereignty.</span></a></li>
   </ol>
 </nav>
 
@@ -139,7 +139,7 @@ the forces that would eventually reach it were already in motion elsewhere in th
 this century &mdash; but European diseases and goods were already traveling between Native peoples across
 the continent through established trade networks.</em></p>
 
-<div class="trail-stop">
+<div class="trail-stop" id="horse-reaches-plateau">
   <span class="date">c. 1600s&ndash;1730</span>
   <h3>The Horse Reaches the Plateau</h3>
   <p>Over this extended period, horses spread into the Columbia Plateau through intertribal trade networks
@@ -159,7 +159,7 @@ European and American ships to the Northwest Coast.</em></p>
   the Northwest Coast.</p>
 </div>
 
-<div class="trail-stop">
+<div class="trail-stop" id="first-documented-contact">
   <span class="date">1774</span>
   <h3>First Documented Contact</h3>
   <p>Spanish explorer Juan Jos&eacute; P&eacute;rez Hern&aacute;ndez lands at Vancouver Island and meets
@@ -397,7 +397,7 @@ and war.</em></p>
   <p><a href="lo-kout.html">Read the story of Lo-Kout&rsquo;s life</a>.</p>
 </div>
 
-<div class="trail-stop">
+<div class="trail-stop" id="stevens-treaties">
   <span class="date">1854&ndash;1855</span>
   <h3>The Stevens Treaties</h3>
   <p>The federal government&rsquo;s central purpose is to extinguish Indigenous title to the land so Washington Territory can be opened to American settlement. In his 1854 address to the territorial legislature, Governor Isaac Stevens calls for appropriations to &ldquo;extinguish their title throughout the Territory,&rdquo; while reserving only the lands considered necessary for Indigenous subsistence.</p>
@@ -418,7 +418,7 @@ and war.</em></p>
 
 <div class="trail-stop"><span class="date">March 26, 1856</span><h3>Attack at the Cascades</h3><p>Indigenous fighters attack settlements and blockhouses at the vital Cascades portage on the Columbia. U.S. reinforcements reopen the transportation route; military commissions later condemn several Indigenous men to death.</p></div>
 
-<span class="trail-era-label">The Spokane&ndash;Coeur d&rsquo;Alene&ndash;Palouse War (1858)</span>
+<span class="trail-era-label" id="spokane-war-turning-point">The Spokane&ndash;Coeur d&rsquo;Alene&ndash;Palouse War (1858)</span>
 <div class="trail-stop">
   <span class="date">May&ndash;September 1858</span>
   <h3>The Decisive Spokane War of 1858</h3>
@@ -450,7 +450,7 @@ and war.</em></p>
   from settlement.</p>
 </div>
 
-<div class="trail-stop">
+<div class="trail-stop" id="smohalla-renewal">
   <span class="date">1860s&ndash;1895</span>
   <h3>Smohalla and the W&aacute;ashat Renewal</h3>
   <p>Smohalla, a Wanapum spiritual leader at Priest Rapids, gives new strength to the W&aacute;ashat, or Seven Drums, tradition. His teachings combine older Columbia River ceremonies with selected Christian elements and call on Indigenous people to maintain ancestral relationships with the earth, salmon, roots, and seasonal life rather than submit to forced farming and cultural assimilation.</p>
@@ -576,6 +576,33 @@ context of the whole state or region. This site hopefully answers some of those 
     <p class="copyright">Copyright &copy; 2026 Washington Indigenous Wars</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  function revealTarget(hash, smooth) {
+    if (!hash || hash === "#") return;
+    var target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    var era = target.closest("details.timeline-era");
+    if (era) era.open = true;
+    window.requestAnimationFrame(function () {
+      target.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    });
+  }
+
+  document.querySelectorAll(".timeline-glance a[href^='#']").forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      var hash = link.getAttribute("href");
+      history.pushState(null, "", hash);
+      revealTarget(hash, true);
+    });
+  });
+
+  window.addEventListener("hashchange", function () { revealTarget(location.hash, true); });
+  revealTarget(location.hash, false);
+}());
+</script>
 
 </body>
 </html>
