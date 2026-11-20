@@ -342,6 +342,100 @@ main { display: block; }
 }
 .trail-era-label:first-child { margin-top: 0; }
 
+/* ---------- readable timeline controls ---------- */
+.timeline-glance {
+  background: rgba(236, 225, 198, 0.96);
+  color: var(--ink);
+  border-top: 4px solid var(--river);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+  padding: 1.5rem clamp(1rem, 3vw, 2rem);
+  margin-bottom: 1.5rem;
+}
+.timeline-glance h2 { margin-bottom: 0.2rem; color: var(--ink); }
+.timeline-glance > p { margin-top: 0; color: var(--ink-soft); }
+.timeline-glance ol {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+.timeline-glance a {
+  display: block;
+  height: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--parchment-line);
+  background: #f7f0df;
+  color: var(--ink);
+  text-decoration: none;
+}
+.timeline-glance a:hover,
+.timeline-glance a:focus { border-color: var(--rust); background: #fff8e8; }
+.timeline-glance strong,
+.timeline-glance span { display: block; }
+.timeline-glance strong { color: var(--rust-dim); font-family: var(--font-meta); font-size: 0.8rem; }
+.timeline-glance span { margin-top: 0.15rem; }
+
+.timeline-era {
+  border: 1px solid var(--parchment-line);
+  background: rgba(255,255,255,0.16);
+  margin: 0 0 1rem;
+}
+.timeline-era > summary {
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding: 1rem 3rem 1rem 1rem;
+  background: #ded0ad;
+  border-left: 5px solid var(--river);
+}
+.timeline-era > summary::-webkit-details-marker { display: none; }
+.timeline-era > summary::after {
+  content: "+";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--rust-dim);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.timeline-era[open] > summary::after { content: "−"; }
+.timeline-era > summary span,
+.timeline-era > summary small { display: block; }
+.timeline-era > summary span {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.timeline-era > summary small {
+  margin-top: 0.15rem;
+  color: var(--ink-soft);
+  font-family: var(--font-meta);
+  font-size: 0.76rem;
+}
+.timeline-era > :not(summary) { margin-left: 1rem; margin-right: 1rem; }
+.timeline-era > .trail-era-label { margin-top: 1.5rem; }
+.timeline-era > .trail-stop:last-of-type { margin-bottom: 1.5rem; }
+
+.source-disclosure {
+  margin: 1rem 0 1.5rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--parchment-line);
+  background: rgba(255,255,255,0.28);
+}
+.source-disclosure > summary {
+  cursor: pointer;
+  font-family: var(--font-meta);
+  font-weight: 700;
+  color: var(--rust-dim);
+}
+.source-disclosure .notes { margin-top: 0.8rem; }
+.compact-list { margin-top: 0.6rem; }
+.compact-list li { margin-bottom: 0.45rem; }
+
 /* ---------- pull quote / speech block ---------- */
 blockquote.speech {
   font-family: var(--font-display);
@@ -588,6 +682,8 @@ table.data tfoot td { font-weight: 700; background: var(--parchment-dim); }
   .panel { padding: 1.6rem 1.2rem; }
   .trail { padding-left: 1.6rem; }
   .trail-stop::before { left: -1.95rem; }
+  .timeline-glance ol { grid-template-columns: 1fr; }
+  .timeline-era > :not(summary) { margin-left: 0.7rem; margin-right: 0.7rem; }
 }
 
 /* ---------- Splawn chat widget ---------- */
